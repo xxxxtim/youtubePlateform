@@ -2,9 +2,9 @@
 <div>
     <Header />
     <div>
-        <Context :videos="$store.getters.getVideosDatas" status="videoPage" />
-        <!-- <button slot="likeBtn">加入最愛</button> -->
-        <!-- </Context> -->
+        <div class="cardsContainer">
+            <Context :key="item.id" v-for="(item) in $store.getters.getVideosDatas" :item="item" status="videoPage" />
+        </div>
     </div>
     <Footer />
 </div>
@@ -28,51 +28,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// $mobile-width: 768px;
-// $computer-width: 1024px;
+@import "../assets/css/mixin.scss";
 
-// @mixin break-point($temp) {
-//     @if $temp==xl {
-//         @media only screen and (min-width: 1200px) {
-//             @content;
-//         }
-//     }
+.cardsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
-//     @else if $temp==lg {
-//         @media only screen and (min-width: 992px) {
-//             @content;
-//         }
-//     }
+.card {
+    cursor: pointer;
 
-//     @else if $temp==md {
-//         @media only screen and (min-width: 768px) {
-//             @content;
-//         }
-//     }
+    @include break-point(md) {
+        width: 400px;
+    }
 
-//     @else if $temp==sm {
-//         @media only screen and (min-width: 540px) {
-//             @content;
-//         }
-//     }
-// }
-
-// .cardContainer {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     flex-wrap: wrap;
-// }
-
-// .card {
-
-//     // flex: 1;
-//     @include break-point(md) {
-//         width: 400px;
-//     }
-
-//     @include break-point(lg) {
-//         width: 300px;
-//     }
-// }
+    @include break-point(lg) {
+        width: 300px;
+    }
+}
 </style>

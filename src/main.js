@@ -10,7 +10,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // In your main vue file - the one where you create the initial vue instance.
 import VuePlyr from 'vue-plyr'
-
+import '@/assets/css/mixin.scss'
 // The second argument is optional and sets the default config values for every player.
 Vue.use(VuePlyr, {
   plyr: {

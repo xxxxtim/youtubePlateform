@@ -1,35 +1,35 @@
 <template>
 <div>
-    <div class="cardContainer">
-        <!-- card1 -->
-
-        <div class="card" :key="index" v-for="(item, index) in videos">
-            <div>
-                <!-- <img src="https://i.ytimg.com/vi/6ymPLmf55PM/sddefault.jpg" alt /> -->
-                <img :src="item.snippet.thumbnails.standard.url" alt />
-                <!-- {{videos}} -->
-                <!-- {{ item.snippet.thumbnails.standard}} -->
-            </div>
-            <div class="caption">
-                <!-- <input @click="changeState(item)" :checked="isChecked?true:false" type="checkbox" :name="item.id" />
-          {{checkStatus}}-->
-                <h2>{{item.snippet.title}}</h2>
-                <h3>簡介:{{item.snippet.description}}</h3>
-                <div class="buttonContainer">
-                    <button @click="toPlayPage(item)">播放影片</button>
-                    <!-- <button @click="$store.commit('setlikeDatas', item)" v-if="status==='videoPage'">加入珍藏</button> -->
-                    <button @click.self="addLikeDatas(item)" disabled="isDisable" v-if="status==='videoPage'">加入珍藏</button>
-                    <button @click="$store.commit('removeLikeDatas', item)" v-if="status!=='videoPage'">刪除最愛</button>
-                </div>
+    <!-- <div class="cardContainer"> -->
+    <!-- card1 -->
+    <div class="card">
+        <!-- <div class="card" :key="index" v-for="(item, index) in videos"> -->
+        <div>
+            <!-- <img src="https://i.ytimg.com/vi/6ymPLmf55PM/sddefault.jpg" alt /> -->
+            <img :src="item.snippet.thumbnails.standard.url" alt />
+            <!-- {{videos}} -->
+            <!-- {{ item.snippet.thumbnails.standard}} -->
+        </div>
+        <div class="caption">
+            <!-- <input @click="changeState(item)" :checked="isChecked?true:false" type="checkbox" :name="item.id" />
+        {{checkStatus}}-->
+            <h2>{{item.snippet.title}}</h2>
+            <h3>簡介:{{item.snippet.description}}</h3>
+            <div class="buttonContainer">
+                <button @click="toPlayPage(item)">播放影片</button>
+                <!-- <button @click="$store.commit('setlikeDatas', item)" v-if="status==='videoPage'">加入珍藏</button> -->
+                <button @click.self="addLikeDatas(item)" :disabled="isDisable" v-if="status==='videoPage'">加入珍藏</button>
+                <button @click="removeLikeDatas(item)" v-if="status!=='videoPage'">刪除最愛</button>
             </div>
         </div>
     </div>
+    <!-- </div> -->
 </div>
 </template>
 
 <script>
 export default {
-    props: ["videos", "status"],
+    props: ["videos", "status", "item"],
     data() {
         return {
             like: [],
@@ -59,44 +59,18 @@ export default {
         addLikeDatas(item) {
             this.isDisable = true;
             this.$store.commit("setlikeDatas", item);
+            this.$store.commit("saveDatas2Sotrage");
+        },
+        removeLikeDatas(item) {
+            this.$store.commit("removeLikeDatas", item);
+            this.$store.commit("saveDatas2Sotrage");
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-@mixin break-point($temp) {
-    @if $temp==xl {
-        @media only screen and (min-width: 1200px) {
-            @content;
-        }
-    }
-
-    @else if $temp==lg {
-        @media only screen and (min-width: 992px) {
-            @content;
-        }
-    }
-
-    @else if $temp==md {
-        @media only screen and (min-width: 768px) {
-            @content;
-        }
-    }
-
-    @else if $temp==sm {
-        @media only screen and (min-width: 540px) {
-            @content;
-        }
-    }
-}
-
-.cardContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
+@import "../assets/css/mixin.scss";
 
 .buttonContainer {
     display: flex;
@@ -112,6 +86,14 @@ export default {
     }
 
     @include break-point(lg) {
+        width: 400px;
+    }
+
+    @include break-point(sm) {
+        width: 400px;
+    }
+
+    @include break-point(mobile) {
         width: 300px;
     }
 }

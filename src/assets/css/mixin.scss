@@ -1,0 +1,19 @@
+@mixin break-point($temp) {
+    @if $temp==xl {
+        @media only screen and (min-width: 1200px) {
+            @content;
+        }
+    } @else if $temp==lg {
+        @media only screen and (min-width: 992px) {
+            @content;
+        }
+    } @else if $temp==md {
+        @media only screen and (min-width: 768px) {
+            @content;
+        }
+    } @else if $temp==sm {
+        @media only screen and (min-width: 540px) {
+            @content;
+        }
+    }
+}

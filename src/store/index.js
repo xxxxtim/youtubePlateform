@@ -23,7 +23,10 @@ export default new Vuex.Store({
     },
     getlikeDatas(state) {
       return state.likeDatas
-    }
+    },
+    // getDatas2Storage(){
+    //   return JSON.parse(localStorage.getItem('likeDatas'))
+    // }
 
   },
   mutations: {
@@ -42,10 +45,17 @@ export default new Vuex.Store({
       let index = state.likeDatas.indexOf(item)
       state.likeDatas.splice(index, 1)
       console.log(state.likeDatas)
-
-
-
     },
+    saveDatas2Sotrage(state) {
+      localStorage.clear()
+      localStorage.setItem("likeDatas", JSON.stringify(state.likeDatas));
+      // state.likeDatas = JSON.parse(localStorage.getItem('likeDatas'))
+    },
+    upDateLikeDatas(state) {
+      state.likeDatas = JSON.parse(localStorage.getItem('likeDatas'))
+      console.log(state.likeDatas)
+    },
+
   },
   actions: {
     async getVideosAPI({ commit }) {

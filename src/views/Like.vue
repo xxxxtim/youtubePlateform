@@ -1,10 +1,8 @@
 <template>
 <div>
     <Header />
-    <div>
-        <Context :videos="$store.getters.getlikeDatas">
-            <!-- <button @click="test" slot="likeBtn">刪除最愛</button> -->
-        </Context>
+    <div class="cardsContainer">
+        <Context :key="item.id" v-for="(item) in $store.getters.getlikeDatas" :item="item" :videos="$store.getters.getlikeDatas" />
     </div>
 </div>
 </template>
@@ -19,6 +17,7 @@ export default {
     },
     created() {
         // $store.getters.getlikeDatas
+        this.$store.commit("upDateLikeDatas");
     },
     methods: {
         test() {
@@ -29,4 +28,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cardsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 </style>
