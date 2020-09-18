@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="headerContainer">
-        <span @click="$router.push('/home')">首頁</span>
+        <span @click="$router.push('/')">首頁</span>
         <span @click="$router.push('/like')">收藏頁</span>
     </div>
 </div>
@@ -11,7 +11,7 @@
 export default {
     methods: {
         toLikePage() {
-            this.$router.push("/like");
+            this.$router.push("/");
             this.$store.commit("saveDatas2Sotrage");
         }
     }
