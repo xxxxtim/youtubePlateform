@@ -22,13 +22,8 @@ export default {
     },
     created() {
         this.$store.commit("upDateLikeDatas");
-        console.log(this.$store.getters.getTotalLikePage);
     },
-    methods: {
-        test() {
-            console.log("delete");
-        }
-    }
+    methods: {}
 };
 </script>
 
