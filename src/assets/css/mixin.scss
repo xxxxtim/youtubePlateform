@@ -12,6 +12,14 @@
             @content;
         }
     } @else if $temp==sm {
+        @media only screen and (min-width: 576px) {
+            @content;
+        }
+    } @else if $temp==mobile {
+        @media only screen and (max-width: 576px) {
+            @content;
+        }
+    } @else if $temp==sm {
         @media only screen and (min-width: 540px) {
             @content;
         }

@@ -6,23 +6,25 @@
             <Context :key="item.id" v-for="(item) in $store.getters.getVideosDatas" :item="item" status="videoPage" />
         </div>
     </div>
-    <Footer />
+    <div class="footerContainer">
+        <Button :key="n" v-for="n in $store.getters.getTotalPages" :pageNumber="n" state="home" />
+    </div>
 </div>
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
 import Context from "@/components/Context.vue";
-import Footer from "@/components/Footer.vue";
+import Button from "@/components/Button.vue";
 
 export default {
     components: {
         Header,
         Context,
-        Footer
+        Button
     },
     created() {
-        this.$store.dispatch("getVideosAPI");
+        this.$store.dispatch("getAllDatas");
     }
 };
 </script>
@@ -37,15 +39,12 @@ export default {
     flex-wrap: wrap;
 }
 
-.card {
-    cursor: pointer;
-
-    @include break-point(md) {
-        width: 400px;
-    }
-
-    @include break-point(lg) {
-        width: 300px;
-    }
+.footerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 25px;
+    font-weight: bold;
 }
 </style>
